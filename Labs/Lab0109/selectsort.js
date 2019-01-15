@@ -1,24 +1,37 @@
 //Brendan Smith
 //AP Comp Sci Principles
 // 11 January 2018
+var txt = [];
+function preload(){
+  txt = loadStrings("words.txt");
+}
 
+function setup() {
 
-function selectionSort(items){
-    var len = Bars.length,
-        min;
-    for (i=0; i < len; i++){
-        //set minimum to this position
-        min = i;
-        //check the rest of the array to see if anything is smaller
-        for (j=i+1; j < len; j++){
-            if (items[j] < items[min]){
-                min = j;
+  noCanvas();
+  console.log(txt)
+  bubbleSort(txt);
+}
+
+function draw() {
+}
+
+function bubbleSort(txt) {
+    var length = txt.length;
+
+    for (var i = 0; i < length; i++) {
+
+        for (var j = 0; j < (length - i - 1); j++) {
+
+            if(txt[j] > txt[j+1]) {
+
+                var temp = txt[j];
+
+                txt[j] = txt[j+1];
+                
+                txt[j+1] = temp;
+                console.log(txt);
             }
         }
-        //if the minimum isn't in the position, swap it
-        if (i != min){
-            swap(items, i, min);
-        }
     }
-    return items;
 }

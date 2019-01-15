@@ -1,6 +1,9 @@
 //Brendan Smith
 //AP Computers Science
 // 11 January 2019
+var data = [1, 2, 3, 4, 5, 6, 7, 8];
+var millisecond = millis();
+text('Milliseconds \nrunning: \n' + millisecond, 5, 40);number of milliseconds since program has started displayed
 
 
 function insertionSort (items) {
