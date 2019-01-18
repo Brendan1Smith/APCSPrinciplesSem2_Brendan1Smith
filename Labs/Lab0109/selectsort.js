@@ -6,10 +6,15 @@ function preload(){
   txt = loadStrings("words.txt");
 }
 
+var data = [1, 2, 3, 4, 5, 6, 7, 8];
+var millisecond = millis();
+text('Milliseconds \nrunning: \n' + millisecond, 5, 40);number of milliseconds since program has started displayed
+
+
 function setup() {
 
   noCanvas();
-  console.log(txt)
+  console.log(txt);
   bubbleSort(txt);
 }
 
@@ -28,7 +33,7 @@ function bubbleSort(txt) {
                 var temp = txt[j];
 
                 txt[j] = txt[j+1];
-                
+
                 txt[j+1] = temp;
                 console.log(txt);
             }
