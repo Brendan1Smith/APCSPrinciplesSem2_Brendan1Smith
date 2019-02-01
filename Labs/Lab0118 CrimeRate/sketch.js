@@ -24,9 +24,9 @@ function bubbleSort(data) {
 
         for (var j = 0; j < (length - i - 1); j++) {
             //Compares the adjacent positions
-            var a = data[j].crimedata.country;
-            var b = data[j+1].crimedata.country;
-            if(data[j] > data[j+1]) {
+            var a = data[j].crimedata.Murder;
+            var b = data[j+1].crimedata.Murder;
+            if(a > b) {
                 //swaps the numbers
                 //temperary variables
                 var temp = data[j];
