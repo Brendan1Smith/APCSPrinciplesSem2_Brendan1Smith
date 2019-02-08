@@ -3,38 +3,57 @@
 
 
 var data = [];
+var sortBy = "males";
+
 function preload(){
-  data = loadJSON("data.json");
+  data = loadJSON("population.json");
 }
 
 function setup() {
-  //remove blank black screen
-  noCanvas();
-  bubbleSort(data);
-  console.log(data.crime)
+  var cnv = createCanvas(800, 800);
+  cnv.position((windowWidth-width)/2, 30);
+  background(5, 5, 5);
+  fill(200, 30, 150);
+  bubble();
 }
 
 function draw() {
 }
 
-function bubbleSort(data) {
-    var length = data.length;
-    //number of passes
-    for (var i = 0; i < length; i++) {
-
-        for (var j = 0; j < (length - i - 1); j++) {
-            //Compares the adjacent positions
-            var a = data[j].crimedata.Murder;
-            var b = data[j+1].crimedata.Murder;
-            if(a > b) {
-                //swaps the numbers
-                //temperary variables
-                var temp = data[j];
-                //replace current string with adjacent string
-                data[j] = data[j+1];
-                //replace adjacent string with current string
-                data[j+1] = temp;
-            }
+function bubble(){
+  var temp;
+  if(sortBy = "UrbanPop"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].total < data.countrydata[j-1].total){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
         }
+      }
     }
+  }
+  if(sortBy = "Murder"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].total < data.countrydata[j-1].total){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
+        }
+      }
+    }
+  }
+  if(sortBy = "Assault"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].total < data.countrydata[j-1].total){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
+        }
+      }
+    }
+  }
+  console.log(data);
 }
