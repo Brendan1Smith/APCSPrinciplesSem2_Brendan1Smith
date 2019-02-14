@@ -1,76 +1,72 @@
 //Brendan Smith
 //AP Comp Sci Principles
+var data = [];
+var sortBy = "males";
+var bigTotal = 0;
 
-
-var data 
 function preload(){
   data = loadJSON("population.json");
 }
 
 function setup() {
-  //remove blank black screen
-  noCanvas();
-  bubbleSort(data);
-  console.log(data.countrydata)
+  var cnv = createCanvas(800, 800);
+  cnv.position((windowWidth-width)/2, 30);
+  background(0, 0, 0);
+  fill(255, 255, 255);
+  bubble();
+  represent();
 }
 
 function draw() {
 }
 
-function bubbleSort(data) {
-    var length = data.length;
-    //number of passes
-    for (var i = 0; i < length; i++) {
-
-        for (var j = 0; j < (length - i - 1); j++) {
-            //Compares the adjacent positions
-            var a = data[j].countrydata.country;
-            var b = data[j+1].countrydata.country;
-            if(data[j] > data[j+1]) {
-                //swaps the numbers
-                //temperary variables
-                var temp = data[j];
-                //replace current string with adjacent string
-                data[j] = data[j+1];
-                //replace adjacent string with current string
-                data[j+1] = temp;
-            }
+function bubble(){
+  var temp;
+  if(sortBy = "age"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].total < data.countrydata[j-1].total){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
         }
+      }
     }
-}
-function insertionSort (items) {
-  for (var i = 0; i < items.length; i++) {
-    let value = items[i]
-    // store the current item value so it can be placed right
-    for (var j = i - 1; j > -1 && items[j] > value; j--) {
-      // loop through the items in the sorted array (the items from the current to the beginning)
-      // copy each item to the next one
-      items[j + 1] = items[j]
-    }
-    // the last item we've reached should now hold the value of the currently sorted item
-    items[j + 1] = value
   }
-
-  return list
+  if(sortBy = "females"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].females < data.countrydata[j-1].females){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
+        }
+      }
+    }
+  }
+  if(sortBy = "males"){
+    for (var i = 1; i < data.countrydata.length; i++){
+      for(var j = i; j > 0; j--){
+        if(data.countrydata[j].males < data.countrydata[j-1].males){
+          temp = data.countrydata[j];
+          data.countrydata[j] = data.countrydata[j-1];
+          data.countrydata[j-1] = temp;
+        }
+      }
+    }
+  }
+  console.log(data);
 }
 
-function selectionSort(items){
-    var len = items.length,
-        min;
-    for (i=0; i < len; i++){
-        //set minimum to this position
-        min = i;
-        //check the rest of the array to see if anything is smaller
-        for (j=i+1; j < len; j++){
-            if (items[j] < items[min]){
-                min = j;
-            }
-        }
-        //if the minimum isn't in the position, swap it
-        if (i != min){
-            swap(items, i, min);
-        }
-    }
-
-    return items;
+function represent(){
+  for(var i = 1; i < data.countrydata.length; i++){
+    bigTotal = bigTotal + data.countrydata[i].total;
+  }
+  var lastAngle = 0;
+  for(var i = 0; i < data.countrydata.length; i ++){
+    var angle = ((data.countrydata[i].total / bigTotal) * (2 * PI));
+    fill(10, 255, 10*i);
+    arc(300, 400, 560, 700, lastAngle, lastAngle + angle);
+    lastAngle += angle
+  }
 }
