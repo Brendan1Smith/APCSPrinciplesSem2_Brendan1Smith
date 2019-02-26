@@ -11,7 +11,7 @@ function preload(){
 function setup() {
   var cnv = createCanvas(800, 800);
   cnv.position((windowWidth-width)/2, 30);
-  background(0, 0, 0);
+  background(255, 0, 0);
   fill(255, 255, 255);
   bubble();
   represent();
@@ -66,7 +66,7 @@ function represent(){
   for(var i = 0; i < data.countrydata.length; i ++){
     var angle = ((data.countrydata[i].total / bigTotal) * (2 * PI));
     fill(10, 255, 10*i);
-    arc(300, 400, 560, 700, lastAngle, lastAngle + angle);
+    arc(300, 400, 500, 700, lastAngle, lastAngle + angle);
     lastAngle += angle
   }
 }
