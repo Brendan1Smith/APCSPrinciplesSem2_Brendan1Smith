@@ -1,72 +1,111 @@
 //Brendan Smith
 //AP Comp Sci Principles
 var data = [];
-var sortBy = "males";
-var bigTotal = 0;
-
 function preload(){
   data = loadJSON("population.json");
 }
 
+
 function setup() {
-  var cnv = createCanvas(800, 800);
+  //canvas
+  var cnv = createCanvas(1000, 2250);
   cnv.position((windowWidth-width)/2, 30);
-  background(255, 0, 0);
-  fill(255, 255, 255);
-  bubble();
-  represent();
+  background(5200, 255, 200);
+  //text
+  textSize(12);
+  textAlign(CENTER, CENTER);
+  //calls
+  organize();
 }
+
 
 function draw() {
 }
 
-function bubble(){
+
+function organize(){
   var temp;
-  if(sortBy = "age"){
-    for (var i = 1; i < data.countrydata.length; i++){
-      for(var j = i; j > 0; j--){
-        if(data.countrydata[j].total < data.countrydata[j-1].total){
-          temp = data.countrydata[j];
-          data.countrydata[j] = data.countrydata[j-1];
-          data.countrydata[j-1] = temp;
-        }
+  for (var i = 1; i < data.countrydata.length; i++){
+    for(var j = i; j > 0; j--){
+      //add change sorting by command
+      if(data.countrydata[j].country < data.countrydata[j-1].country){
+        temp = data.countrydata[j];
+        data.countrydata[j] = data.countrydata[j-1];
+        data.countrydata[j-1] = temp;
       }
     }
   }
-  if(sortBy = "females"){
-    for (var i = 1; i < data.countrydata.length; i++){
-      for(var j = i; j > 0; j--){
-        if(data.countrydata[j].females < data.countrydata[j-1].females){
-          temp = data.countrydata[j];
-          data.countrydata[j] = data.countrydata[j-1];
-          data.countrydata[j-1] = temp;
-        }
-      }
-    }
-  }
-  if(sortBy = "males"){
-    for (var i = 1; i < data.countrydata.length; i++){
-      for(var j = i; j > 0; j--){
-        if(data.countrydata[j].males < data.countrydata[j-1].males){
-          temp = data.countrydata[j];
-          data.countrydata[j] = data.countrydata[j-1];
-          data.countrydata[j-1] = temp;
-        }
-      }
-    }
-  }
-  console.log(data);
+  drawWords();
+  check();
+  bars();
 }
 
-function represent(){
+
+function drawWords(){
+  textAlign(LEFT);
+  //titles
+  fill(200, 255, 200);
+  text("Countries", 100, 10);
+  text("Totals", 30, 200);
+  text("Males", 500, 10);
+  text("Females", 700, 10);
+  //names
+  fill(255, 0, 0);
   for(var i = 1; i < data.countrydata.length; i++){
-    bigTotal = bigTotal + data.countrydata[i].total;
+    text(data.countrydata[i].country, 100, 10 + (i*10));
   }
-  var lastAngle = 0;
-  for(var i = 0; i < data.countrydata.length; i ++){
-    var angle = ((data.countrydata[i].total / bigTotal) * (2 * PI));
-    fill(10, 255, 10*i);
-    arc(300, 400, 500, 700, lastAngle, lastAngle + angle);
-    lastAngle += angle
+  //total
+  fill(0, 0, 0);
+  for(var i = 1; i < data.countrydata.length; i++){
+    text(data.countrydata[i].total, 300, 10 + (i*10));
+  }
+  //male
+  fill(0, 0, 255);
+  for(var i = 1; i < data.countrydata.length; i++){
+    text(data.countrydata[i].males, 500, 10 + (i*10));
+  }
+  //female
+  fill(110, 99, 255);
+  for(var i = 1; i < data.countrydata.length; i++){
+    text(data.countrydata[i].females, 700, 10 + (i*10));
+  }
+}
+
+
+function check(){
+  for(var i = 1; i < data.countrydata.length; i++){
+    console.log(data.countrydata[i].total);
+  }
+}
+
+function bars(){
+  var allTotal = 0;
+  var allMale = 0;
+  var allFemale = 0;
+  for(var i = 1; i < data.countrydata.length; i++){
+    allTotal = allTotal + data.countrydata[i].total;
+    allMale = allMale + data.countrydata[i].males;
+    allFemale = allFemale + data.countrydata[i].females;
+  }
+  //total
+  for(var i = 1; i < data.countrydata.length; i++){
+    var size = (data.countrydata[i].total / allTotal) * (100);
+    console.log(size + "size");
+    fill(0, 255, 0);
+    rect(350, 10 + (i*10), size*5, 10);
+  }
+  //male
+  for(var i = 1; i < data.countrydata.length; i++){
+    var size = (data.countrydata[i].males / allMale) * (100);
+    console.log(size + "size");
+    fill(0, 0, 255);
+    rect(550, 10 + (i*10), size*5, 10);
+  }
+  //female
+  for(var i = 1; i < data.countrydata.length; i++){
+    var size = (data.countrydata[i].females / allFemale) * (100);
+    console.log(size + "size");
+    fill(0, 0, 255);
+    rect(750, 10 + (i*10), size*5, 10);
   }
 }
