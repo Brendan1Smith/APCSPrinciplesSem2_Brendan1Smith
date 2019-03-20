@@ -36,22 +36,22 @@ function Ball(location, velocity, radius, col){
        fill(100,700,225);
        if(this.loc.x<400 && this.loc.y>400 ){
        stroke(0,0,random(100,200)+this.loc.dist(this.vel))
-       strokeWeight(random(1,5));
+       strokeWeight(random(3,2));
        line(this.loc.x, this.loc.y, 10, 40);
      }
      if(this.loc.x>400 && this.loc.y>400 ){
      stroke(random(100,200)+this.loc.dist(this.vel),0,0)
-     strokeWeight(random(1,5));
+     strokeWeight(random(5,1));
      rect(this.loc.x, this.loc.y, 10, 40);
    }
      if(this.loc.x<400 && this.loc.y<400){
        stroke(random(100,200)+this.loc.dist(this.vel),random(100,200)+this.loc.dist(this.vel),random(100,200)+this.loc.dist(this.vel))
-       strokeWeight(random(1,5));
+       strokeWeight(random(3,2));
        line(this.loc.x, this.loc.y, 10, 40);
      }
      if(this.loc.x>400 && this.loc.y<400){
      stroke(0,random(100,200)+this.loc.dist(this.vel),0)
-     strokeWeight(random(1,5));
+     strokeWeight(random(3,2));
      line(this.loc.x, this.loc.y, 10, 40);
    }
  }
