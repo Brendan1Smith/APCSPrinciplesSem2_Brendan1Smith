@@ -4,18 +4,19 @@
 //Snake Game
 //defines the snake and its parameters
 function Snake(loc, vel){
-
+//what the snake needs to know
   this.loc = loc;
   this.vel = vel;
   this.segments = [];
   this.status = "false";
-//run funtion allows snake to die and render
+
+//other functions of the snake
   this.run = function(){
     this.update();
     this.render();
     this.dead();
   }
-//thi part adds the segments to the snake
+//snakes movement
   this.update = function(){
     for(var i = this.segments.length - 1; i >= 0; i--){
       if(i > 0){
@@ -26,23 +27,22 @@ function Snake(loc, vel){
         this.segments[0].y = this.loc.y;
       }
     }
-    // constrains snake to the canvas
     this.loc.add(this.vel);
     this.loc.x = constrain(this.loc.x, 0, 800-20)
     this.loc.y = constrain(this.loc.y, 0, 800-20)
   }
-
+//render function of the snake
   this.render = function(){
     for(var i = 0; i < this.segments.length; i++){
-      fill(0, 0, 0);
-      stroke(0, 225, 225);
+      fill(69, 68, 89);
+      stroke(121, 139, 19);
       rect(this.segments[i].x, this.segments[i].y, 20, 20)
     }
-    //colors the snake
-    fill(255, 0, 220);
+    fill(29, 220, 69);
     rect(this.loc.x, this.loc.y, 20, 20);
   }
-// snake is dead
+
+//the snakes death function
   this.dead = function(){
     for(var i = 0; i < this.segments.length; i++){
       var distX = this.loc.x - this.segments[i].x;

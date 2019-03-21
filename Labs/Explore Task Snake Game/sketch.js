@@ -8,53 +8,75 @@ var numSeg = 1;
 var start = "true"
 var font;
 var score = 0;
-//setup function fot the canvas
+var timer = 100;
+
+//standarn setup
 function setup(){
   textAlign(CENTER, CENTER);
+  //new framerate
   frameRate(10);
   var cnv = createCanvas(800, 800);
   cnv.position((windowWidth-width)/2, 30);
-  background(121, 139, 19);
+  background(70, 200, 30);
   loadSnake();
-  loadFood(1);
+  loadFood(100);
+  //load in 100 food and have it become depleted
 }
-// draws the snake and food every frame
+//draw functions
 function draw(){
-  background(0, 0, 225);
+  background(160, 196, 211);
   snake.run();
-  fill(200, 25, 100)
-  textSize(30);
-  text(score, 100, 100);
+  //score count
+  textSize(50);
+  text("score: " + score, 120, 50)
+  noStroke();
+  Score();
+  //calls for food function
   for(var i = 0; i < food.length; i++){
     food[i].run();
+    //timer function
+    textAlign(700, 100);
+      textSize(50);
+      text(timer, 730, 70);
+      if (frameCount % 600 == 0 && timer > 0) {
+    timer --;
+  }
+  //game over function of the timer
+  if (timer == 0) {
+    text("GAME OVER", width/2, height*0.7);
+    gameover();
   }
 
+  }
+//fucntions
   checkLoc();
   deadGame();
   gameStart();
   Score();
 }
-
+//checking location of the food
 function checkLoc(){
   for(var i = 0; i < food.length; i++){
     var distX = food[i].loc.x - snake.loc.x;
     var distY = food[i].loc.y - snake.loc.y;
     if(distX == (0) && distY == (0)){
       food.splice(i, 1);
-      loadFood(1);
+      //removes the food
+      //would add in a new food if that was the way I wanted it to be
+      loadFood(0);
       snake.segments.push(createVector(0, 0));
-      score = score + 1
-
+      console.log(snake.segments.length)
+      score++;
     }
   }
 }
-// adds velocity to the snake
+//snake function call
 function loadSnake(){
   var loc = createVector(200, 200);
   var vel = createVector(0, 0);
   snake = new Snake(loc, vel);
 }
-// loads the food on the canvas
+//loading food into the canvas
 function loadFood(numFood){
   for(var i = 0; i < numFood; i++){
     var min = 1;
@@ -67,7 +89,7 @@ function loadFood(numFood){
     food.push(f);
   }
 }
-//this gives the snake directin based on the arrows
+//controls for the snakes direction
 function keyPressed(){
   start = "false"
   if(keyCode === 38){
@@ -83,33 +105,37 @@ function keyPressed(){
     snake.vel = createVector(-20, 0)
   }
 }
-// kills the snake if it touches itself
+//game over function
 function deadGame(){
   if(snake.status == "true"){
     snake = 0
     score = 0;
-    text("Game Over Bud, Refresh To Try Again", 400, 400)
+    text("Good try bud, refresh for more fun", 400, 400);
     loadSnake();
     gameStart();
-    gameOver();
+    gameover();
+
   }
 }
-// splash screen
+//pop up page of the beginning of the game
 function gameStart(){
   if(start == "true"){
     textFont()
-    fill(220, 220, 220);
+    fill(10, 250, 50);
+    rect(225, 300, 350, 200);
+    fill(0,0,0);
+    rect(240, 315, 320, 170)
+    fill(150, 200, 70);
     textAlign(CENTER);
-    textSize(75);
-    text("Snikity Snake Game", 400, 300)
-    textSize(20);
-    text("Press any button to start", 400, 550)
+    textSize(49);
+    text("Snake Survival", 400, 435)
   }
 }
-// score code
+//score function with win function as well.
 function Score(){
-  if (score > 15){
-    fill(25, 200, 5);
-    text("Congrats Buddy You Won!", 400, 400);
+  if (score > 99){
+  fill(255, 0, 5);
+  textAlign(CENTER);
+  text("YOU WON!!!!!!", 400, 400);
   }
 }
