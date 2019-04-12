@@ -12,7 +12,7 @@ function Food(loc){
   this.render = function(){
     fill(255, 0, 0);
     stroke(255);
-    rect(this.loc.x, this.loc.y, 20, 20);
+    image(img, this.loc.x, this.loc.y, 60, 60);
     stroke(121, 139, 19);
   }
 

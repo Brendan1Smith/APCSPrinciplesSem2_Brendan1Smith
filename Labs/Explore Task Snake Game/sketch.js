@@ -2,13 +2,14 @@
 //AP Comp Sci Principles
 //Snake Game
 // global variables
+//Global variables
 var snake;
 var food = [];
 var numSeg = 1;
 var start = "true"
 var font;
 var score = 0;
-var timer = 100;
+var timeRemaining;
 
 //standarn setup
 function setup(){
@@ -17,14 +18,19 @@ function setup(){
   frameRate(10);
   var cnv = createCanvas(800, 800);
   cnv.position((windowWidth-width)/2, 30);
-  background(70, 200, 30);
+  background(200, 244, 66);
   loadSnake();
   loadFood(100);
+  img = loadImage("corgi.png");
+  fSlider = createSlider(0, 50, 10)
+  fSlider.position(780, 5);
+  frameRate(frames);
   //load in 100 food and have it become depleted
 }
 //draw functions
 function draw(){
-  background(160, 196, 211);
+  frames = fSlider.value();
+  background(200, 244, 66);
   snake.run();
   //score count
   textSize(50);
@@ -37,22 +43,13 @@ function draw(){
     //timer function
     textAlign(700, 100);
       textSize(50);
-      text(timer, 730, 70);
-      if (frameCount % 600 == 0 && timer > 0) {
-    timer --;
-  }
-  //game over function of the timer
-  if (timer == 0) {
-    text("GAME OVER", width/2, height*0.7);
-    gameover();
-  }
-
   }
 //fucntions
   checkLoc();
   deadGame();
   gameStart();
   Score();
+  snake.timer();
 }
 //checking location of the food
 function checkLoc(){
@@ -110,7 +107,7 @@ function deadGame(){
   if(snake.status == "true"){
     snake = 0
     score = 0;
-    text("Good try bud, refresh for more fun", 400, 400);
+    text("Good try bud, refresh for more!", 400, 400);
     loadSnake();
     gameStart();
     gameover();
@@ -121,14 +118,14 @@ function deadGame(){
 function gameStart(){
   if(start == "true"){
     textFont()
-    fill(10, 250, 50);
+    fill(5, 225, 15);
     rect(225, 300, 350, 200);
-    fill(0,0,0);
+    fill(0, 0, 0);
     rect(240, 315, 320, 170)
     fill(150, 200, 70);
     textAlign(CENTER);
-    textSize(49);
-    text("Snake Survival", 400, 435)
+    textSize(15);
+    text("Corgi Chowdown! Be Careful They're Quick", 400, 435)
   }
 }
 //score function with win function as well.
@@ -136,6 +133,12 @@ function Score(){
   if (score > 99){
   fill(255, 0, 5);
   textAlign(CENTER);
-  text("YOU WON!!!!!!", 400, 400);
+  text("good job", 400, 400);
+  }
+  snake.timer();
+  text(snake.timeRemaining, 0, 100, 1450);
+  noStroke();
+  if (snake.timeRemaining === 0){
+    deadGame();
   }
 }

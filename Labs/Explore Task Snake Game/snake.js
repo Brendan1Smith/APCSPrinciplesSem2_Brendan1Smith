@@ -9,12 +9,14 @@ function Snake(loc, vel){
   this.vel = vel;
   this.segments = [];
   this.status = "false";
+  this.timeRemaining = 100
 
 //other functions of the snake
   this.run = function(){
     this.update();
     this.render();
     this.dead();
+    this.timer();
   }
 //snakes movement
   this.update = function(){
@@ -38,7 +40,7 @@ function Snake(loc, vel){
       stroke(121, 139, 19);
       rect(this.segments[i].x, this.segments[i].y, 20, 20)
     }
-    fill(29, 220, 69);
+    fill(195, 206, 224);
     rect(this.loc.x, this.loc.y, 20, 20);
   }
 
@@ -53,4 +55,15 @@ function Snake(loc, vel){
       }
     }
   }
+  this.timer = function () {
+
+     if (frameCount % 40 === 0 && this.timeRemaining > 0) { // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+       this.timeRemaining --;
+     }
+     if (this.timeRemaining === 0) {
+    this.dead();
+     }
+
+ }
+
 }
