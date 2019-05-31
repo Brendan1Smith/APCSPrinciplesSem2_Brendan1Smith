@@ -1,4 +1,4 @@
-//Brendan Smith
+
 //AP Comp Sci Principles
 //Snake Game
 // global variables

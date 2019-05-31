@@ -1,4 +1,4 @@
-//Brendan Smith
+
 
 //food function
 function Food(loc){

@@ -1,5 +1,4 @@
 
-//Brendan Smith
 //AP Comp Sci Principles
 //Snake Game
 //defines the snake and its parameters
